@@ -2,12 +2,13 @@
 let abi = null;
 let contract = null;
 
-// load abi
+// load qx abi
 function load_abi(callback) {
   fetch("../qx-abi.json")
     .then(response => response.json())
     .then(json => {
       abi = json;
+      console.log('[abi]', abi);
       callback();
     });
 }
@@ -24,4 +25,33 @@ async function load_contract(addr, callback) {
   // show sample command
   console.log('[contract]', contract);
   callback();
+}
+
+// lock animation
+// TODO spinner animation
+let lock = _ => $('#btn-mint').addClass('disabled');
+let unlock = _ => $('#btn-mint').removeClass('disabled');
+
+// prepare screen
+function prepare_screen() {
+  lock();
+  load_abi(unlock);
+}
+
+// mint
+function mint(addr, qty) {
+  load_contract(addr, _ => {
+    contract.functions.mintToken(qty)
+      .then(result => {
+        console.log('>>>', result);
+        alert('Minted!');
+      })
+      .catch(err => {
+        console.log('>>>', err);
+        alert(err.data.message)
+      })
+      .finally(_ => {
+        unlock();
+      });
+  });
 }
