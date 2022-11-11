@@ -1,6 +1,7 @@
 <?php
   $title = "Just Meaw - Public Free Mint Never Die";
-  $desc = "I know we love public free mint. But it is currently unavailable. So Go to website link and fill in the item 6.0 mint token per banner suggest. Mint Token = 0 NumberOfToken(s) = 1 Write New Public Free mint NFT Never die. Enjoy!!!";
+  $desc = 'We love public mint. But it is unavailable in Quix. But we will not give up or surrender. Today, 11th Novermber 2022, We shall celebrate our "Public Mint day" Public mint NFT Never dies. https://mint.diew.app/meawusdd/ or in website link';
+  $img = "https://qx.app/_next/image?url=https%3A%2F%2Ffanbase-1.s3.amazonaws.com%2Fquixotic-collection-profile%2Fimageedit_4_5517035030.png&w=3840&q=75";
 ?>
 <!doctype html>
 <html lang="en">

@@ -28,9 +28,14 @@ async function load_contract(addr, callback) {
 }
 
 // lock animation
-// TODO spinner animation
-let lock = _ => $('#btn-mint').addClass('disabled');
-let unlock = _ => $('#btn-mint').removeClass('disabled');
+let lock = _ => {
+  $('#btn-mint').addClass('disabled')
+  $('#btn-mint').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`);
+};
+let unlock = _ => {
+  $('#btn-mint').removeClass('disabled')
+  $('#btn-mint').html("Mint");
+};
 
 // prepare screen
 function prepare_screen() {
@@ -40,6 +45,7 @@ function prepare_screen() {
 
 // mint
 function mint(addr, qty) {
+  lock();
   load_contract(addr, _ => {
     contract.functions.mintToken(qty)
       .then(result => {

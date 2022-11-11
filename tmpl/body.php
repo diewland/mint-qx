@@ -3,9 +3,9 @@
     <div class='col-md-4'></div>
     <div class='col'>
       <div class="card">
-        <img src="https://qx.app/_next/image?url=https%3A%2F%2Ffanbase-1.s3.amazonaws.com%2Fquixotic-collection-profile%2Fimageedit_4_5517035030.png&w=3840&q=75" class="card-img-top">
+        <img src="<?=$img?>" class="card-img-top">
         <div class="card-body">
-          <a href="#/" id="btn-mint" class="btn btn-lg btn-dark w-100 mb-3">Mint</a>
+          <button id="btn-mint" class="btn btn-lg btn-dark w-100 mb-3" type="button">Mint</button>
           <h5 class="card-title"><?=$title?></h5>
           <p class="card-text"><?=$desc?></p>
         </div>
