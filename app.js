@@ -30,7 +30,7 @@ async function load_contract(addr, callback) {
 // lock animation
 let lock = _ => {
   $('#btn-mint').addClass('disabled')
-  $('#btn-mint').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`);
+  $('#btn-mint').html(`<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>`);
 };
 let unlock = _ => {
   $('#btn-mint').removeClass('disabled')
