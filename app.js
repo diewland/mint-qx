@@ -49,7 +49,11 @@ function mint(addr, qty) {
         let title = 'Oops!';
         let msg = '';
         try {
-          msg = err.data.message;
+          // get message
+          if (err.data)
+            msg = err.data.message;
+          else
+            msg = err.message;
           // <format1> "execution reverted: Exceeded max token purchase"
           let mm = msg.split(": ");
           if (mm.length == 2) {
