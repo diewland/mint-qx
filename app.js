@@ -15,8 +15,6 @@ function load_abi(callback) {
 
 // load contract
 async function load_contract(addr, callback) {
-  // get address
-  try { ethers.utils.getAddress(addr) } catch(e) { alert(e); return; }
   // connect to metamask + set contract to console
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   await provider.send("eth_requestAccounts", []);
@@ -44,17 +42,30 @@ function mint(addr, qty) {
     contract.functions.mintToken(qty)
       .then(result => {
         console.log('>>>', result);
-        Swal.fire('Minted!', '', 'success');
+        Swal.fire('Minted ✨', '', 'success');
       })
       .catch(err => {
         console.log('>>>', err);
+        let title = 'Oops!';
         let msg = '';
-        try { msg = err.data.message } catch(err) {}
-        Swal.fire('Oops!', msg, 'error');
+        try {
+          msg = err.data.message;
+          // <format1> "execution reverted: Exceeded max token purchase"
+          let mm = msg.split(": ");
+          if (mm.length == 2) {
+            title = mm[0];
+            msg = mm[1];
+          }
+        } catch(err) {}
+        Swal.fire(title, msg, 'error');
       })
       .finally(_ => {
         unlock();
       });
+  }).catch(e => {
+    console.log('>>>', e);
+    Swal.fire('MetaMask not found', e.toString(), 'error');
+    unlock();
   });
 }
 
