@@ -35,14 +35,14 @@ let unlock = _ => {
   $('#btn-mint').html("Mint");
 };
 
-// mint
-function mint(addr, qty) {
+// command
+function cmd(addr, cb, ok_title, ok_msg='') {
   lock();
   load_contract(addr, _ => {
-    contract.functions.mintToken(qty)
+    cb.call()
       .then(result => {
         console.log('>>>', result);
-        Swal.fire('Minted ✨', '', 'success');
+        Swal.fire(ok_title, ok_msg, 'success');
       })
       .catch(err => {
         console.log('>>>', err);
@@ -72,6 +72,10 @@ function mint(addr, qty) {
     unlock();
   });
 }
+
+// mint
+let mint = (addr, qty) => cmd(addr, _ => contract.functions.mintToken(qty), 'Minted ✨');
+let flip_pb = (addr) => cmd(addr, _ => contract.functions.flipSaleState(), 'Public Sale Flipped');
 
 // prepare screen
 $(_ => {
