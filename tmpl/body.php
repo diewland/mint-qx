@@ -6,11 +6,12 @@
         <img src="<?=$img?>" class="card-img-top">
         <div class="card-body">
           <button id="btn-mint" class="btn btn-lg btn-dark w-100 mb-3" type="button">Mint</button>
-          <h5 class="card-title">
-            <?=$title?>
+          <h5 class="card-title mb-0"><?=$title?></h5>
+          <div class="mb-2">
+            Price: <b><?=$price?></b> Supply: <b><?=$supply?></b>
             <a data-toggle="tooltip" title="Quix" href="<?=$qx?>" target="_blank"><img class="ico-h" src="https://qx.app/opt_favicon.png"></a>
             <a data-toggle="tooltip" title="Etherscan" href="<?=$etherscan?>" target="_blank"><img class="ico-h" src="https://qx.app/_next/image?url=%2Fetherscan.svg&w=3840&q=75"></a>
-          </h5>
+          </div>
           <p class="card-text"><?=$desc?></p>
         </div>
       </div>
