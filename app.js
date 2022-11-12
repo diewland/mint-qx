@@ -37,12 +37,6 @@ let unlock = _ => {
   $('#btn-mint').html("Mint");
 };
 
-// prepare screen
-function prepare_screen() {
-  lock();
-  load_abi(unlock);
-}
-
 // mint
 function mint(addr, qty) {
   lock();
@@ -50,14 +44,25 @@ function mint(addr, qty) {
     contract.functions.mintToken(qty)
       .then(result => {
         console.log('>>>', result);
-        alert('Minted!');
+        Swal.fire('Minted!', '', 'success');
       })
       .catch(err => {
         console.log('>>>', err);
-        alert(err.data.message)
+        let msg = '';
+        try { msg = err.data.message } catch(err) {}
+        Swal.fire('Oops!', msg, 'error');
       })
       .finally(_ => {
         unlock();
       });
   });
 }
+
+// prepare screen
+$(_ => {
+  // 1) get abi
+  lock();
+  load_abi(unlock);
+  // 2) prepare tooltip
+  $('[data-toggle="tooltip"]').tooltip();
+})
