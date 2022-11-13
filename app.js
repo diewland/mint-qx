@@ -37,6 +37,9 @@ let unlock = _ => {
 
 // command
 function cmd(addr, cb, ok_title, ok_msg='') {
+  // check OP network
+  if (!check_op_chain()) return;
+  // craft command
   lock();
   load_contract(addr, _ => {
     cb.call()
@@ -73,9 +76,17 @@ function cmd(addr, cb, ok_title, ok_msg='') {
   });
 }
 
-// mint
+// contract methods
 let mint = (addr, qty) => cmd(addr, _ => contract.functions.mintToken(qty), 'Minted ✨');
 let flip_pb = (addr) => cmd(addr, _ => contract.functions.flipSaleState(), 'Public Sale Flipped');
+
+// network
+let check_chain = (chain_name, chain_id) => {
+  if (window.ethereum.networkVersion == chain_id) return true;
+  Swal.fire('Invalid Network', `Please switch to ${chain_name}`, 'warning');
+  return false;
+}
+let check_op_chain = _ => check_chain("Optimism", "10");
 
 // bin screen from config
 function update_config(addr, mint_qty) {
