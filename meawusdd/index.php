@@ -16,7 +16,8 @@
 
       let addr = '0x0C65eE287e90Dc65C51eEaB3c885a8ce452C6A4C';
       let mint_qty = 1;
-      $('#btn-mint').click(_ => mint(addr, mint_qty));
+      //
+      update_config(addr, mint_qty);
 
     </script>
   </body>

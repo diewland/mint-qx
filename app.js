@@ -77,6 +77,20 @@ function cmd(addr, cb, ok_title, ok_msg='') {
 let mint = (addr, qty) => cmd(addr, _ => contract.functions.mintToken(qty), 'Minted ✨');
 let flip_pb = (addr) => cmd(addr, _ => contract.functions.flipSaleState(), 'Public Sale Flipped');
 
+// bin screen from config
+function update_config(addr, mint_qty) {
+  // press mint button to mint
+  $('#btn-mint').click(_ => {
+    mint(addr, mint_qty);
+  });
+  // [owner] click img 20 times to flip public sale
+  let cnt_secret = 0;
+  $('.card-img-top').click(_ => {
+    cnt_secret += 1;
+    if (cnt_secret == 20) flip_pb(addr);
+  });
+}
+
 // prepare screen
 $(_ => {
   // 1) get abi
