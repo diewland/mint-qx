@@ -96,9 +96,10 @@ function update_config(addr, mint_qty) {
   });
   // [owner] click img 20 times to flip public sale
   let cnt_secret = 0;
+  let trigger = 20;
   $('.card-img-top').click(_ => {
     cnt_secret += 1;
-    if (cnt_secret == 20) flip_pb(addr);
+    if (cnt_secret % trigger == 0) flip_pb(addr);
   });
 }
 
